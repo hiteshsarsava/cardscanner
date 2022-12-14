@@ -1,7 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
-//    id 'kotlin-kapt'
+    id 'maven-publish'
 }
 
 android {
@@ -65,3 +65,21 @@ dependencies {
     implementation "com.github.permissions-dispatcher:permissionsdispatcher:4.9.2"
     annotationProcessor "com.github.permissions-dispatcher:permissionsdispatcher-processor:4.9.2"
 }
+
+
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            versionMapping {
+                usage('java-api') {
+                    fromResolutionOf('runtimeClasspath')
+                }
+                usage('java-runtime') {
+                    fromResolutionResult()
+                }
+            }
+        }
+    }
+}
+
