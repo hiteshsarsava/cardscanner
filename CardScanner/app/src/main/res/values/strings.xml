@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">CardScanner</string>
+    <string name="start_scan">Start Scan</string>
+    <string name="card_no">Card No.</string>
+    <string name="owner_name">Owner Name</string>
+    <string name="expiry_date">Expiry Date</string>
+</resources>
