@@ -1,3 +1,6 @@
+This Library will help you to implement scan the card(Credit Card, Debit Card) details. It will help you to save your time and mistakes.
+
+
 # Set Up
 
 <b>1. Add it in your project level build.gradle at the end of repositories:</b>
