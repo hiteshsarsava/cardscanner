@@ -1,18 +1,10 @@
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
-    }
-}
-
 plugins {
     id 'com.android.library'
-    id 'org.jetbrains.kotlin.android'
-    id 'maven-publish'
+//    id 'org.jetbrains.kotlin.android'
+//    id 'maven-publish'
+    id 'kotlin-android'
 }
-group = 'com.Hitesh'
+//group = 'com.Hitesh'
 
 
 android {
@@ -34,26 +26,26 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '11'
     }
 
     buildFeatures{
         viewBinding true
     }
 
-    testFixtures {
-        enable = true
-    }
-
-    publishing {
-        singleVariant('release') {
-            withSourcesJar()
-        }
-    }
+//    testFixtures {
+//        enable = true
+//    }
+//
+//    publishing {
+//        singleVariant('release') {
+//            withSourcesJar()
+//        }
+//    }
 }
 
 dependencies {
@@ -89,58 +81,62 @@ dependencies {
 
 
 
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            versionMapping {
-                usage('java-api') {
-                    fromResolutionOf('runtimeClasspath')
-                }
-                usage('java-runtime') {
-                    fromResolutionResult(null)
-                }
-            }
-        }
+//publishing {
+//    publications {
+//        mavenJava(MavenPublication) {
+//            versionMapping {
+//                usage('java-api') {
+//                    fromResolutionOf('runtimeClasspath')
+//                }
+//                usage('java-runtime') {
+//                    fromResolutionResult(null)
+//                }
+//            }
+//        }
+//
+//        release(MavenPublication) {
+//            groupId = 'com.Hitesh'
+//            artifactId = 'cardscanner'
+//            version = '0.0.2'
+//            afterEvaluate {
+//                from components.release
+//            }
+//        }
+//    }
+//}
+//
+//task javadoc(type: Javadoc) {
+//
+//    description "Generates Javadoc for ${archivesBaseName}-${version} API"
+//    group JavaBasePlugin.DOCUMENTATION_GROUP
+//
+//    title = "${archivesBaseName}-${version} API References"
+//
+////    source android.sourceSets.main.java.srcDirs, configurations.doc.collect { zipTree(it) }
+//    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+//
+//    options {
+//        memberLevel = JavadocMemberLevel.PUBLIC
+//        linksOffline('http://developer.android.com/reference/', "${android.sdkDirectory}/docs/reference");
+//    }
+//
+//    include '<path of your public api>/*.java'
+//    exclude '**/BuildConfig.java'
+//    exclude '**/R.java'
+//    exclude '**/test/**/*.java'
+//
+//    failOnError false
+//}
+//
+//task androidJavadocsJar(type: Jar, dependsOn: javadoc) {
+//    classifier = 'javadoc'
+//    from javadoc.destinationDir
+//}
 
-        release(MavenPublication) {
-            groupId = 'com.Hitesh'
-            artifactId = 'cardscanner'
-            version = '0.0.2'
-            afterEvaluate {
-                from components.release
-            }
-        }
-    }
-}
+//artifacts {
+//    archives androidJavadocsJar
+//}
 
-task javadoc(type: Javadoc) {
-
-    description "Generates Javadoc for ${archivesBaseName}-${version} API"
-    group JavaBasePlugin.DOCUMENTATION_GROUP
-
-    title = "${archivesBaseName}-${version} API References"
-
-//    source android.sourceSets.main.java.srcDirs, configurations.doc.collect { zipTree(it) }
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-
-    options {
-        memberLevel = JavadocMemberLevel.PUBLIC
-        linksOffline('http://developer.android.com/reference/', "${android.sdkDirectory}/docs/reference");
-    }
-
-    include '<path of your public api>/*.java'
-    exclude '**/BuildConfig.java'
-    exclude '**/R.java'
-    exclude '**/test/**/*.java'
-
-    failOnError false
-}
-
-task androidJavadocsJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
-
-artifacts {
-    archives androidJavadocsJar
+repositories {
+    mavenCentral()
 }
