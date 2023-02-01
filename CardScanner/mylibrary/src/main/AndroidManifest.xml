@@ -4,8 +4,8 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <application>
         <activity
-            android:name=".ui.ScannerActivity"
-            android:exported="false">
+            android:name="com.hitesh.mylibrary.ui.ScannerActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
