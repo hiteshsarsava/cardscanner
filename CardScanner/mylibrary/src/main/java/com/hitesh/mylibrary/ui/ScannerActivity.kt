@@ -12,8 +12,8 @@ import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions
-import com.hitesh.mylibrary.R
-import com.hitesh.mylibrary.databinding.ActivityScannerBinding
+import com.hitesh.cardscanner.R
+import com.hitesh.cardscanner.databinding.ActivityScannerBinding
 import com.hitesh.mylibrary.usecases.ExtractDataFromFrameUseCase
 import com.hitesh.mylibrary.utils.getCameraProvider
 import com.hitesh.mylibrary.utils.hasPermission

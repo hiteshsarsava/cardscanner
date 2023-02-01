@@ -1,11 +1,22 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
+    }
+}
+
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
     id 'maven-publish'
 }
+group = 'com.Hitesh'
+
 
 android {
-    namespace 'com.hitesh.mylibrary'
+    namespace 'com.hitesh.cardscanner'
     compileSdk 33
 
     defaultConfig {
@@ -32,6 +43,16 @@ android {
 
     buildFeatures{
         viewBinding true
+    }
+
+    testFixtures {
+        enable = true
+    }
+
+    publishing {
+        singleVariant('release') {
+            withSourcesJar()
+        }
     }
 }
 
@@ -76,10 +97,50 @@ publishing {
                     fromResolutionOf('runtimeClasspath')
                 }
                 usage('java-runtime') {
-                    fromResolutionResult()
+                    fromResolutionResult(null)
                 }
+            }
+        }
+
+        release(MavenPublication) {
+            groupId = 'com.Hitesh'
+            artifactId = 'cardscanner'
+            version = '0.0.2'
+            afterEvaluate {
+                from components.release
             }
         }
     }
 }
 
+task javadoc(type: Javadoc) {
+
+    description "Generates Javadoc for ${archivesBaseName}-${version} API"
+    group JavaBasePlugin.DOCUMENTATION_GROUP
+
+    title = "${archivesBaseName}-${version} API References"
+
+//    source android.sourceSets.main.java.srcDirs, configurations.doc.collect { zipTree(it) }
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+
+    options {
+        memberLevel = JavadocMemberLevel.PUBLIC
+        linksOffline('http://developer.android.com/reference/', "${android.sdkDirectory}/docs/reference");
+    }
+
+    include '<path of your public api>/*.java'
+    exclude '**/BuildConfig.java'
+    exclude '**/R.java'
+    exclude '**/test/**/*.java'
+
+    failOnError false
+}
+
+task androidJavadocsJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives androidJavadocsJar
+}
